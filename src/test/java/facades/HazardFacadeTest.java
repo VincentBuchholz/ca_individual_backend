@@ -38,8 +38,13 @@ class HazardFacadeTest {
 
         hazard1.setAddress(address1);
         hazard2.setAddress(address2);
+        EntityManager em = emf.createEntityManager();
 
-            EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.createNamedQuery("Hazard.deleteAllRows").executeUpdate();
+        em.createNamedQuery("Address.deleteAllRows").executeUpdate();
+        em.getTransaction().commit();
+
         try {
             em.getTransaction().begin();
             em.persist(hazard1);

@@ -5,6 +5,7 @@ import java.util.Date;
 
 @Table(name = "hazard")
 @Entity
+@NamedQuery(name = "Hazard.deleteAllRows", query = "DELETE from Hazard")
 public class Hazard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
