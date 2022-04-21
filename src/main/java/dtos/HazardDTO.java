@@ -9,19 +9,19 @@ public class HazardDTO {
     private int id;
     private String type;
     private Date created;
-    private AddressDTO addressDTO;
+    private AddressDTO address;
 
     public HazardDTO(String type, AddressDTO addressDTO) {
         this.type = type;
         this.created = new Date();
-        this.addressDTO = addressDTO;
+        this.address = addressDTO;
     }
 
     public HazardDTO(Hazard hazard) {
-        this.id = id;
+        this.id = hazard.getId();
         this.type = hazard.getType();
         this.created = hazard.getCreated();
-        this.addressDTO = new AddressDTO(hazard.getAddress());
+        this.address = new AddressDTO(hazard.getAddress());
     }
 
     public String getType() {
@@ -41,11 +41,11 @@ public class HazardDTO {
     }
 
     public AddressDTO getAddressDTO() {
-        return addressDTO;
+        return address;
     }
 
     public void setAddressDTO(AddressDTO addressDTO) {
-        this.addressDTO = addressDTO;
+        this.address = addressDTO;
     }
 
     public int getId() {
@@ -62,7 +62,7 @@ public class HazardDTO {
                 "id=" + id +
                 ", type='" + type + '\'' +
                 ", created=" + created +
-                ", addressDTO=" + addressDTO +
+                ", addressDTO=" + address +
                 '}';
     }
 }

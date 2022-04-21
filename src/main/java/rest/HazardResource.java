@@ -3,13 +3,12 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtos.HazardDTO;
+import errorhandling.NotFoundException;
 import facades.HazardFacade;
 import utils.EMF_Creator;
 
 import javax.persistence.EntityManagerFactory;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -34,4 +33,21 @@ import java.util.List;
             List<HazardDTO> hazardDTOs = hazardFacade.getAllHazards();
             return Response.ok().entity(GSON.toJson(hazardDTOs)).build();
         }
+
+    @POST
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response createPerson(String content){
+        HazardDTO hdto = GSON.fromJson(content, HazardDTO.class);
+        HazardDTO newHdto = hazardFacade.createHazard(hdto);
+        return Response.ok().entity(GSON.toJson(newHdto)).build();
+    }
+    @DELETE
+    @Path("/delete/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response deletePhoneFromPerson(@PathParam("id") int id){
+        hazardFacade.deleteHazard(id);
+        return Response.ok().entity("Deleted").build();
+    }
 }

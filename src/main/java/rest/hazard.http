@@ -1,0 +1,13 @@
+POST http://localhost:8080/ca2_war_exploded/api/hazard
+
+{
+    "type": "Bil i nødspor",
+    "address": {
+      "road": "Motorring",
+      "number": "3",
+      "zip": 2800
+    }
+  }
+
+###
+DELETE http://localhost:8080/ca2_war_exploded/api/hazard/delete/3
