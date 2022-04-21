@@ -15,11 +15,14 @@ public class HttpUtils {
         //con.setRequestProperty("Accept", "application/json;charset=UTF-8");
         con.setRequestProperty("Accept", "application/json");
         con.setRequestProperty("User-Agent", "server");
+        con.setRequestProperty("X-AUTH-TOKEN", "lzwy79uxoknzbxv5321iqqptvdw7re5a");
+
 
         Scanner scan = new Scanner(con.getInputStream());
-        String jsonStr = null;
-        if (scan.hasNext()) {
-            jsonStr = scan.nextLine();
+        String jsonStr = "";
+
+        while (scan.hasNext()) {
+                jsonStr += scan.nextLine();
         }
         scan.close();
         return jsonStr;

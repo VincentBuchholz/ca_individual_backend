@@ -1,6 +1,5 @@
 package rest;
 
-import dtos.JokeDTO;
 import io.restassured.RestAssured;
 import io.restassured.parsing.Parser;
 import org.glassfish.grizzly.http.server.HttpServer;
@@ -54,18 +53,4 @@ class RestTest {
         httpServer.shutdownNow();
     }
 
-    @Test
-    void getJokes() {
-        JokeDTO jokeDTO= given()
-                .contentType("application/json")
-                .when()
-                .get("/jokes")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.OK_200.getStatusCode())
-                .extract().body().jsonPath().getObject("", JokeDTO.class);
-
-        assertNotNull(jokeDTO.getJoke1());
-        assertNotNull(jokeDTO.getJoke2());
-    }
 }
