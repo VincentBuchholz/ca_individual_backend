@@ -9,5 +9,6 @@ POST http://localhost:8080/ca2_war_exploded/api/hazard
     }
   }
 
+
 ###
 DELETE http://localhost:8080/ca2_war_exploded/api/hazard/delete/3

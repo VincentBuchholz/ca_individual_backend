@@ -7,6 +7,7 @@ import errorhandling.NotFoundException;
 import facades.HazardFacade;
 import utils.EMF_Creator;
 
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -37,16 +38,18 @@ import java.util.List;
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response createPerson(String content){
+    @RolesAllowed("user")
+    public Response createHazard(String content){
         HazardDTO hdto = GSON.fromJson(content, HazardDTO.class);
         HazardDTO newHdto = hazardFacade.createHazard(hdto);
         return Response.ok().entity(GSON.toJson(newHdto)).build();
     }
     @DELETE
     @Path("/delete/{id}")
+    @RolesAllowed("admin")
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response deletePhoneFromPerson(@PathParam("id") int id){
+    public Response delteHazard(@PathParam("id") int id){
         hazardFacade.deleteHazard(id);
         return Response.ok().entity("Deleted").build();
     }

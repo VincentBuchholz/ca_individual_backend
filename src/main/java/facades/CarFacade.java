@@ -11,7 +11,7 @@ public class CarFacade {
 
     public CarDTO getCarByNumberPlate(String numberPlate) throws IOException {
         Gson gson = new Gson();
-        String car = HttpUtils.fetchData("https://v1.motorapi.dk/vehicles/al47267");
+        String car = HttpUtils.fetchData("https://v1.motorapi.dk/vehicles/"+numberPlate);
 
 
         CarDTO carDTO = gson.fromJson(car, CarDTO.class);
